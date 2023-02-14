@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  hexagonal-node:
+    build: '.'
+    container_name: 'hexagonal-node'
+    image: 'hexagonal-node/test'
+    port:
+      - 5070:5070
+    volumes:
+      - '.': '/usr/src/app'
+    networks:
+      - net-hexagonal
+  postgresql:
+    image: postgres:14
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD: '123456'
+      - POSTGRES_USER: 'hexagonal'
+    volumes:
+      - ./data:/data/db
+    networks:
+      - net-hexagonal
+networks:
+  net-hexagonal:
+    driver: 'bridge'
