@@ -11,7 +11,7 @@ export class GetAllUsers implements GetAllUsersUseCase {
     this.userRepository = userRepository
   }
 
-  async execute(): Promise<UserModelResponse[]> {
-    return await this.userRepository.getUsers()
+  async execute(query: object): Promise<UserModelResponse[]> {
+    return await this.userRepository.getUsers(query)
   }
 }

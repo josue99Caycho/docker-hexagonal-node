@@ -2,21 +2,23 @@ version: '3'
 
 services:
   hexagonal-node:
-    build: '.'
+    build: ${SERVICE_PATH}
     container_name: 'hexagonal-node'
     image: 'hexagonal-node/test'
-    port:
-      - 5070:5070
+    ports:
+      - ${PORT}:${PORT}
     volumes:
-      - '.': '/usr/src/app'
+      - ${SERVICE_PATH}:${WORK_DIR}
     networks:
       - net-hexagonal
-  postgresql:
-    image: postgres:14
+    depends_on:
+      - 'mongodb'
+  mongodb:
+    container_name: mongodb
+    image: mongo
     restart: always
-    environment:
-      - POSTGRES_PASSWORD: '123456'
-      - POSTGRES_USER: 'hexagonal'
+    ports:
+      - 27017:27017
     volumes:
       - ./data:/data/db
     networks:

@@ -1,5 +1,5 @@
 import { UserModelResponse } from '../../../model/user.model';
 
 export interface GetAllUsersUseCase {
-  execute(): Promise<UserModelResponse[]>;
+  execute(query: object): Promise<UserModelResponse[]>;
 }

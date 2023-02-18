@@ -2,7 +2,7 @@ import { CreateUserUserCase } from '../../interfaces/use-cases/user/create-user'
 import { UserModelRequest } from '../../model/user.model';
 import { UserRepository } from '../../interfaces/repositories/user-repository';
 
-export class createUser implements CreateUserUserCase {
+export class CreateUser implements CreateUserUserCase {
 
   userRository: UserRepository;
 
@@ -10,7 +10,7 @@ export class createUser implements CreateUserUserCase {
     this.userRository = userRository
   }
 
-  async execute(body: UserModelRequest): Promise<void> {
+  async execute(body: UserModelRequest) {
     await this.userRository.createUser(body)
   }
 }
