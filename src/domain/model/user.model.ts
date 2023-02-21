@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 export interface UserModelResponse {
   id: number;
   name: string;
@@ -5,6 +7,7 @@ export interface UserModelResponse {
 }
 
 export interface UserModelRequest {
+  _id?: ObjectId;
   name: string;
   age: number;
   email: string;

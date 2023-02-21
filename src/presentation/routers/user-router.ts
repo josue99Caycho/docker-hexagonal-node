@@ -3,11 +3,13 @@ import { Request, Response } from 'express'
 
 import { GetAllUsersUseCase } from '../../domain/interfaces/use-cases/user/get-all-users';
 import { CreateUserUserCase } from '../../domain/interfaces/use-cases/user/create-user';
+import { UpdateUserUseCase } from '../../domain/interfaces/use-cases/user/update-user';
 
 
 export default function RouterUser (
   getAllUsers: GetAllUsersUseCase,
-  createUser: CreateUserUserCase
+  createUser: CreateUserUserCase,
+  updateUser: UpdateUserUseCase
 ) {
 
   const router = express.Router()
@@ -41,6 +43,18 @@ export default function RouterUser (
       res.status(500).send({ message: "Error saving data" })
     }
 
+  })
+
+  router.put('/', async (req: Request, res: Response) => {
+    try {
+
+      await updateUser.execute(req.body)
+
+      res.send({ data: 'Updated', status: 200, error: null });
+
+    } catch (error) {
+      res.status(500).send({ message: "Error updating data" })
+    }
   })
 
   return router
