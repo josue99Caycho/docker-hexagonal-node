@@ -4,4 +4,5 @@ export interface MongoDatabaseWrapper {
   find(query: object): Promise<any[]>;
   insertOne(user: UserModelRequest): void;
   updateOne(user: UserModelRequest): void;
+  deleteOne(userId: string): void;
 }

@@ -19,4 +19,12 @@ export class UserRepositoryImpl implements UserRepository {
     await this.userDataSource.create(body)
   }
 
+  async updateUser(body: UserModelRequest) {
+    await this.userDataSource.update(body)
+  }
+
+  async deleteUser(userId: string) {
+    await this.userDataSource.delete(userId);
+  }
+
 }

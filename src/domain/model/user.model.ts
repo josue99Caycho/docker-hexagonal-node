@@ -7,10 +7,11 @@ export interface UserModelResponse {
 }
 
 export interface UserModelRequest {
-  _id?: ObjectId;
+  id?: string;
   name: string;
   age: number;
   email: string;
   lastName?: string;
   phone?: string;
+  status?: boolean;
 }

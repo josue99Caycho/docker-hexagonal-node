@@ -25,4 +25,8 @@ export class MongoDBUserDataSource implements UserDataSource {
     return await this.db.updateOne(user)
   }
 
+  async delete(userId: string): Promise<void> {
+    await this.db.deleteOne(userId);
+  }
+
 }
