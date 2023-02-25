@@ -8,6 +8,7 @@ export interface UserModelResponse {
 
 export interface UserModelRequest {
   id?: string;
+  dni: string;
   name: string;
   age: number;
   email: string;

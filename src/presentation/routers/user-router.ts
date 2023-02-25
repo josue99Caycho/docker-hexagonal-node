@@ -8,9 +8,12 @@ import { UserModelResponse } from '../../domain/model/user.model';
 
 import { v4 as uuidv4 } from 'uuid';
 import { DeleteUserUserCase } from '../../domain/interfaces/use-cases/user/detele-user';
+import { UserMiddlewareQueryParams } from '../middleware/user';
+import { GetUserByValueUseaCase } from '../../domain/interfaces/use-cases/user/get-user-by-value';
 
 export default function RouterUser (
   getAllUsers: GetAllUsersUseCase,
+  getAllByValue: GetUserByValueUseaCase,
   createUser: CreateUserUserCase,
   updateUser: UpdateUserUseCase,
   deleteUser: DeleteUserUserCase
@@ -25,7 +28,23 @@ export default function RouterUser (
       const { email } = req.query
       const params = email ? { email } : {}
 
-      const users = await getAllUsers.execute({ ...params });
+      const users = await getAllUsers.execute({ ...params, status: true });
+
+      res.send({ data: users, status: 200, error: null });
+
+    } catch (error) {
+      res.status(500).send({ message: "Error fetching data" })
+    }
+
+  });
+
+  router.get('/value',[UserMiddlewareQueryParams], async (req: Request, res: Response) => {
+
+    try {
+
+      const { term } = req.query
+
+      const users = await getAllByValue.execute(term)
 
       res.send({ data: users, status: 200, error: null });
 

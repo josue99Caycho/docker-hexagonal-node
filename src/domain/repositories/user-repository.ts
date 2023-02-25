@@ -15,6 +15,10 @@ export class UserRepositoryImpl implements UserRepository {
     return await this.userDataSource.getAll(query);
   }
 
+  async getUserByValue(value: string | number): Promise<UserModelResponse[]> {
+    return await this.userDataSource.getAllByValue(value);
+  }
+
   async createUser(body: UserModelRequest) {
     await this.userDataSource.create(body)
   }

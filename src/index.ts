@@ -10,6 +10,7 @@ import { DeleteUser } from './domain/use-cases/user/delete-user';
 import { UserRepositoryImpl } from './domain/repositories/user-repository';
 
 import { userMongoDataSources } from './presentation/database/helper/user';
+import { GetAllUserByValue } from './domain/use-cases/user/get-all-user-by-value';
 
 (async () => {
 
@@ -19,6 +20,7 @@ import { userMongoDataSources } from './presentation/database/helper/user';
   const userMiddleware = 
   RouterUser(
     new GetAllUsers(new UserRepositoryImpl(dataSource)),
+    new GetAllUserByValue(new UserRepositoryImpl(dataSource)),
     new CreateUser(new UserRepositoryImpl(dataSource)),
     new UpdateUser(new UserRepositoryImpl(dataSource)),
     new DeleteUser(new UserRepositoryImpl(dataSource))
