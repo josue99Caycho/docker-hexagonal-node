@@ -11,6 +11,7 @@ import { UserRepositoryImpl } from './domain/repositories/user-repository';
 
 import { userMongoDataSources } from './presentation/database/helper/user';
 import { GetAllUserByValue } from './domain/use-cases/user/get-all-user-by-value';
+import { GetUserById } from './domain/use-cases/user/get-user-by-id';
 
 (async () => {
 
@@ -21,6 +22,7 @@ import { GetAllUserByValue } from './domain/use-cases/user/get-all-user-by-value
   RouterUser(
     new GetAllUsers(new UserRepositoryImpl(dataSource)),
     new GetAllUserByValue(new UserRepositoryImpl(dataSource)),
+    new GetUserById(new UserRepositoryImpl(dataSource)),
     new CreateUser(new UserRepositoryImpl(dataSource)),
     new UpdateUser(new UserRepositoryImpl(dataSource)),
     new DeleteUser(new UserRepositoryImpl(dataSource))

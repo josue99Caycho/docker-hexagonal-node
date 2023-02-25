@@ -25,6 +25,10 @@ export class MongoDBUserDataSource implements UserDataSource {
     return await this.db.findByFilterValue(value)
   }
 
+  async getById(id: string): Promise<UserModelResponse> {
+    return await this.db.findUserById(id)
+  }
+
   async update(user: UserModelRequest): Promise<void> {
     return await this.db.updateOne(user)
   }

@@ -10,10 +10,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { DeleteUserUserCase } from '../../domain/interfaces/use-cases/user/detele-user';
 import { UserMiddlewareQueryParams } from '../middleware/user';
 import { GetUserByValueUseaCase } from '../../domain/interfaces/use-cases/user/get-user-by-value';
+import { GetUserByIdUseCase } from '../../domain/interfaces/use-cases/user/get-user-by-id';
 
 export default function RouterUser (
   getAllUsers: GetAllUsersUseCase,
   getAllByValue: GetUserByValueUseaCase,
+  getUserById: GetUserByIdUseCase,
   createUser: CreateUserUserCase,
   updateUser: UpdateUserUseCase,
   deleteUser: DeleteUserUserCase
@@ -47,6 +49,22 @@ export default function RouterUser (
       const users = await getAllByValue.execute(term)
 
       res.send({ data: users, status: 200, error: null });
+
+    } catch (error) {
+      res.status(500).send({ message: "Error fetching data" })
+    }
+
+  });
+
+  router.get('/:userId', async (req: Request, res: Response) => {
+
+    try {
+
+      const { userId } = req.params
+
+      const user = await getUserById.execute(userId)
+
+      res.send({ data: user, status: 200, error: null });
 
     } catch (error) {
       res.status(500).send({ message: "Error fetching data" })
