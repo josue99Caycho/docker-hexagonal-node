@@ -24,7 +24,7 @@ export default function RouterUser (
   const router = express.Router()
 
   router.get('/', async (req: Request, res: Response) => {
-
+    console.log('-------Consultando por todos los usuarios-------')
     try {
 
       const { email } = req.query
@@ -41,6 +41,7 @@ export default function RouterUser (
   });
 
   router.get('/value',[UserMiddlewareQueryParams], async (req: Request, res: Response) => {
+    console.log('-------Buscando usuario por valores-------')
 
     try {
 
@@ -57,6 +58,7 @@ export default function RouterUser (
   });
 
   router.get('/:userId', async (req: Request, res: Response) => {
+    console.log('-------Consultando usuario por ID-------')
 
     try {
 
@@ -73,6 +75,7 @@ export default function RouterUser (
   });
 
   router.post('/',  async (req: Request, res: Response) => {
+    console.log('-------Registrando usuario------')
 
     try {
 
@@ -92,6 +95,7 @@ export default function RouterUser (
   })
 
   router.put('/', async (req: Request, res: Response) => {
+    console.log('-------Actualizando usuario-------')
     try {
 
       await updateUser.execute(req.body)
@@ -104,6 +108,8 @@ export default function RouterUser (
   })
 
   router.delete('/:userId', async (req: Request, res: Response) => {
+    console.log('-------Dando de baja usuario por ID-------')
+
     try {
 
       const userId = req.params.userId

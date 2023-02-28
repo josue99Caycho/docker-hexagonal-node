@@ -18,15 +18,15 @@ import { GetUserById } from './domain/use-cases/user/get-user-by-id';
   const PORT = 5070;
   const dataSource = await userMongoDataSources();
 
-  const userMiddleware = 
-  RouterUser(
-    new GetAllUsers(new UserRepositoryImpl(dataSource)),
-    new GetAllUserByValue(new UserRepositoryImpl(dataSource)),
-    new GetUserById(new UserRepositoryImpl(dataSource)),
-    new CreateUser(new UserRepositoryImpl(dataSource)),
-    new UpdateUser(new UserRepositoryImpl(dataSource)),
-    new DeleteUser(new UserRepositoryImpl(dataSource))
-  )
+  const userMiddleware =
+    RouterUser(
+      new GetAllUsers(new UserRepositoryImpl(dataSource)),
+      new GetAllUserByValue(new UserRepositoryImpl(dataSource)),
+      new GetUserById(new UserRepositoryImpl(dataSource)),
+      new CreateUser(new UserRepositoryImpl(dataSource)),
+      new UpdateUser(new UserRepositoryImpl(dataSource)),
+      new DeleteUser(new UserRepositoryImpl(dataSource))
+    )
 
   server.use('/user', userMiddleware)
   server.listen(PORT, () => console.log(`Corriendo server en http://localhost:${PORT}`))
